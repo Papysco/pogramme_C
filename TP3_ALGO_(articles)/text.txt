@@ -1,0 +1,103 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct E_{
+	char donnee[50];
+	struct E_ *suivant;
+}Liste;
+
+Liste *InsertionALaFin(Liste *L,char *mot);
+Liste *CreerListe();
+void AfficheListe(Liste *L);
+Liste *InsertionElement(Liste *LTri,char *mot);
+Liste *TrierListe(Liste *L);
+
+int main()
+{
+  Liste *L,*LTri;
+  L = CreerListe();
+  LTri = TrierListe(L);
+  AfficheListe(L);
+  AfficheListe(LTri);
+  return 0;
+}
+
+Liste *InsertionALaFin(Liste *L,char *mot){
+  Liste *nouveau, *pL;
+  nouveau=(Liste*) malloc(sizeof(Liste));
+  strcpy(nouveau->donnee,mot);
+  nouveau->suivant = NULL;
+  if(L == NULL)
+    L = nouveau;
+  else{
+    for(pL = L;pL->suivant != NULL; pL = pL->suivant)
+	    ;
+    pL->suivant = nouveau;
+  }
+  return L;
+}
+
+Liste *CreerListe(){
+  char mot[50], choix = 'o';
+  Liste *L = NULL;
+  while(choix == 'o'){
+    printf("Entrez un mot : ");
+    scanf("%s",mot);
+    L = InsertionALaFin(L,mot);
+    printf("Voulez-vous continuer? ");
+    getchar();
+    choix = getchar();
+    getchar();
+  }
+  return L;
+}
+
+void AfficheListe(Liste *L){
+  Liste *pL;
+  for(pL=L;pL!=NULL;pL=pL->suivant)
+    printf("%s ",pL->donnee);
+  printf("\n");
+}
+
+Liste *InsertionElement(Liste *LTri,char *mot){
+  Liste *pL,*nouveau,*suivant;
+
+  nouveau = (Liste*)malloc(sizeof(Liste));
+  strcpy(nouveau->donnee,mot);
+  nouveau->suivant = NULL;
+
+
+  if(LTri == NULL)
+    return nouveau;
+  pL=LTri;
+  suivant = pL->suivant;
+
+  if(strcmp(pL->donnee,mot)<0){
+    if(suivant==NULL){
+      pL->suivant=nouveau;
+      return LTri;
+    }
+  }else{
+    nouveau->suivant = pL;
+    return nouveau;
+  }
+  while(suivant->suivant != NULL && strcmp(suivant->donnee,mot)<0){
+    pL = pL->suivant;
+    suivant = pL->suivant;
+  }
+  if(strcmp(suivant->donnee,mot)>0){
+    pL->suivant = nouveau;
+    nouveau->suivant = suivant;
+  }else
+    suivant->suivant = nouveau;
+  return LTri;
+}
+
+Liste *TrierListe(Liste *L){
+  Liste *pL,*LTri;
+  LTri = NULL;
+  for(pL=L;pL!=NULL;pL=pL->suivant)
+    LTri=InsertionElement(LTri,pL->donnee);
+  return LTri;
+}

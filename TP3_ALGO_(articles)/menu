@@ -1,0 +1,71 @@
+
+
+
+/*menu*/
+	void menu()
+	{	
+		int choix;
+			/*debut*/
+		printf("\n");
+		do
+		{
+			printf("0000000000000000000000000000000000000\n");
+			printf("		MENU	   		             \n");
+			printf("0000000000000000000000000000000000000");
+			printf("\n");
+			printf("1.  \n"); 
+			printf("2.  \n");
+			printf("3.  \n");  
+			printf("4.  \n");		  
+			printf("5.  \n");		 
+			printf("6.  \n"); 				
+
+			printf("0.QUITTER LA PROCEDURE..\n");
+			printf("\n");
+			printf("Entrer votre choix  : "); scanf("%d",&choix);
+
+			switch(choix)
+			{
+				case 1 : ; 	printf("\n");
+					break;
+				case 2 : ;	printf("\n");
+					break;
+				case 3 : ; 	printf("\n");
+					break;	
+				case 4 : ;	printf("\n"); 
+					break;
+				case 5 : ; 	printf("\n");
+					break;
+				case 6 : ;	printf("\n");
+					break;
+				case 0 : printf("Appuyer sur une  touche ... ");
+					break;
+			}
+			
+		}while(choix != 0);
+	}
+
+
+
+
+
+void saisi( )
+{
+	char rep;
+	int i = 0;
+
+	printf("\n");
+	printf("xxxxxxxxxxxxx\n");
+	printf("*******************\n");
+
+	do
+	{
+		
+
+		printf("Voulez vous enrigistrer un nouveau  ? : ");
+		scanf("%s", &rep);
+		i++;
+
+	}while((rep == 'o') && i <= max);
+	
+}
